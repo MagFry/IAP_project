@@ -4,27 +4,21 @@ from rest_framework.parsers import JSONParser
 from .models import Employees, EmployeesHours, EmployeesSalaries
 from .serializers import EmployeesSerializer, EmployeesHoursSerializer, EmployeesSalariesSerializer
 import requests
-from pprint import pprint
 
-@csrf_exempt
-def invalid_employees_list(request):
-    if request.method == 'GET':
-        # bad request
-        return JsonResponse({'error':'bad request, missing parameter: branchOfficeId'}, status=400)
 
 @csrf_exempt
 def employees_list(request, branchOfficeId):
     """
-    List all code snippets, or create a new snippet.
+    List all employees per branch_office.
     """
     if request.method == 'GET':
-        # TODO: filter employees by branchOfficeId
         employees = Employees.objects.filter(branch_office_id = branchOfficeId)
         serializer = EmployeesSerializer(employees, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+
 @csrf_exempt
-def employees(request):
+def add_employee(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = EmployeesSerializer(data=data)
@@ -33,10 +27,11 @@ def employees(request):
             return JsonResponse(serializer.data, status=201, safe=False)
         return JsonResponse(request, status=400)
 
+
 @csrf_exempt
 def employees_detail(request, pk):
     """
-    Retrieve, update or delete a code snippet.
+    Retrieve, update or delete an employee.
     """
     try:
         emp = Employees.objects.get(pk=pk)
@@ -58,28 +53,9 @@ def employees_detail(request, pk):
     elif request.method == 'DELETE':
         emp.delete()
         return HttpResponse(status=204)
-'''
-@csrf_exempt
-def employees_hours_list(request):
-    if request.method == 'GET':
-        employees_hours = EmployeesHours.objects.all()
-        serializer = EmployeesHoursSerializer(employees_hours, many=True)
-        return JsonResponse(serializer.data, safe=False)
 
-    if request.method == "POST":
-        #dla testów potem zmienic porty!! etc
-        r = requests.get('http://127.0.0.1:8080/employee_hours/list/')
-        #print(r)
-        json = r.json()
-        #data = JSONParser().parse(r)
-        serializer = EmployeesHoursSerializer(data=json)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201, safe=False)
-        return JsonResponse(request, status=400)
-'''
 
-#synchronization with BO in order to retrieve employee hours
+# synchronization with BO in order to retrieve employee hours
 @csrf_exempt
 def employees_hours(request):
     url = 'http://127.0.0.1:8080/employee_hours/list/'
@@ -119,7 +95,8 @@ def employees_hours(request):
         serializer = EmployeesHoursSerializer(emp_hours, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-#counting salary for each employ and adding to Salaries table
+
+# counting salary for each employ and adding to Salaries table
 def employees_salaries(request):
     list_of_ids_and_pay = Employees.objects.values_list('employee_id', 'pay')
     list_of_ids_and_values = EmployeesHours.objects.values_list('employee_id', 'value')

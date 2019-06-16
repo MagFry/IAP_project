@@ -1,17 +1,17 @@
 from django.db import models
 from django.contrib import admin
-from branch_offices.models import Branch_Offices
+
 
 
 # Register your models here.
 class Employees(models.Model):
     employee_id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     date_of_birth = models.DateField()
     pay = models.FloatField()
     branch_office_id = models.IntegerField()
+    isManager = models.BooleanField()
 
     def __str__(self):
         return self.first_name

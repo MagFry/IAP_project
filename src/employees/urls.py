@@ -3,8 +3,8 @@ from employees import views as employees_views
 
 
 urlpatterns = [
-    # bad request, missing parameter: branchOfficeId
-    path('api/employees', employees_views.employees),
+    # Adding employee
+    path('api/employees', employees_views.add_employee),
     # Gets a collection of employee objects by branchOfficeId
     path('api/employees/list/<int:branchOfficeId>', employees_views.employees_list),
     path('api/employees/<int:pk>', employees_views.employees_detail),
