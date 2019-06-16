@@ -23,7 +23,9 @@ def employees_list(request, branchOfficeId):
         serializer = EmployeesSerializer(employees, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-    elif request.method == 'POST':
+@csrf_exempt
+def employees(request):
+    if request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = EmployeesSerializer(data=data)
         if serializer.is_valid():
@@ -37,24 +39,24 @@ def employees_detail(request, pk):
     Retrieve, update or delete a code snippet.
     """
     try:
-        branch_offices = Employees.objects.get(pk=pk)
+        emp = Employees.objects.get(pk=pk)
     except Employees.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = EmployeesSerializer(branch_offices)
+        serializer = EmployeesSerializer(emp)
         return JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = EmployeesSerializer(branch_offices, data=data)
+        serializer = EmployeesSerializer(emp, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        branch_offices.delete()
+        emp.delete()
         return HttpResponse(status=204)
 '''
 @csrf_exempt
