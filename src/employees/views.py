@@ -19,7 +19,7 @@ def employees_list(request, branchOfficeId):
     """
     if request.method == 'GET':
         # TODO: filter employees by branchOfficeId
-        employees = Employees.objects.all()
+        employees = Employees.objects.filter(branch_office_id = branchOfficeId)
         serializer = EmployeesSerializer(employees, many=True)
         return JsonResponse(serializer.data, safe=False)
 
