@@ -28,7 +28,7 @@ $ cat my-emp.json
 #       "date_of_birth": "1996-01-01",
 #       "pay": 30,
 #       "branch_office_id": 2
-        "isManager": False
+#       "isManager": False
 # }
 $ curl -i -X POST localhost:8000/api/employees -d @my-emp.json -H 'Content-Type: text/json; charset=utf-8'
 $ curl -i -L localhost:8000/api/employees/list/2
