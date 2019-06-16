@@ -23,17 +23,17 @@ $ curl -i -L localhost:8000/api/employees/list/2
 $ cat my-emp.json
 # {
 #       "employee_id": 4,
-#       "first_name": "Mag",
-#       "last_name": "Fry",
+#       "name": "Mag Fry",
 #       "email": "mag123@wp.pl",
 #       "date_of_birth": "1996-01-01",
 #       "pay": 30,
 #       "branch_office_id": 2
+        "isManager": False
 # }
 $ curl -i -X POST localhost:8000/api/employees -d @my-emp.json -H 'Content-Type: text/json; charset=utf-8'
 $ curl -i -L localhost:8000/api/employees/list/2
 [
-  {"employee_id": 1, "first_name": "Mag", "last_name": "Fry",
+  {"employee_id": 1, "name": "Mag Fry", 
    "email": "mag123@wp.pl", "date_of_birth": "1996-01-01",
     "pay": 30.0, "branch_office_id": 2}
 ]
@@ -48,7 +48,7 @@ Delete the local application:
 In file C:\Windows\System32\drivers\etc\hosts add line
 127.0.0.1       db
 
-##How to build project
+## How to build project
 1. pip install -r requirements.txt
 2. python src/manage.py makemigrations
 3. python src/manage.py migrate 
