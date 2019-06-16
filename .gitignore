@@ -2,7 +2,7 @@ venv/**
 .idea/**
 docker/src
 *.pyc
-/src/**/migrations/*initial.py/
+*initial.py
 /src/**/__pycache__/
 
 
