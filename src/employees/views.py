@@ -7,6 +7,16 @@ import requests
 
 
 @csrf_exempt
+def employees_list_all(request):
+    """
+    List all employees.
+    """
+    if request.method == 'GET':
+        employees = Employees.objects.all()
+        serializer = EmployeesSerializer(employees, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
 def employees_list(request, branchOfficeId):
     """
     List all employees per branch_office.
@@ -55,6 +65,7 @@ def employees_detail(request, pk):
         return HttpResponse(status=204)
 
 
+# Remeber to add /api/employee_hours/list_all endpoint in stead the one placed below
 # synchronization with BO in order to retrieve employee hours
 @csrf_exempt
 def employees_hours(request):
@@ -86,6 +97,7 @@ def employees_hours(request):
 
 
 # counting salary for each employ and adding to Salaries table(not working for now)
+@csrf_exempt
 def employees_salaries(request):
     list_of_ids_and_pay = Employees.objects.values_list('employee_id', 'pay')
     list_of_ids_and_values = EmployeesHours.objects.values_list('employee_id', 'value')
@@ -106,4 +118,14 @@ def employees_salaries(request):
     if request.method == 'GET':
         emp_sal = EmployeesSalaries.objects.all()
         serializer = EmployeesSalariesSerializer(emp_sal, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
+@csrf_exempt
+def employees_hours_per_BO(request, branchOfficeId, emp_id):
+    if request.method == 'GET':
+        emp = Employees.objects.filter(branch_office_id=branchOfficeId)
+        emp_hours = EmployeesHours.objects.filter(employee_id=emp_id)
+
+        serializer = EmployeesHoursSerializer(emp_hours, many=True)
         return JsonResponse(serializer.data, safe=False)

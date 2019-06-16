@@ -14,7 +14,7 @@ class Employees(models.Model):
     isManager = models.BooleanField()
 
     def __str__(self):
-        return self.first_name
+        return self.name
 
 class EmployeesHours(models.Model):
     employees_hours_id = models.AutoField(primary_key=True)
