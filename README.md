@@ -21,3 +21,8 @@ Delete the local application:
 ```
 ./tasks down
 ```
+## Windows database link configuration
+
+In file C:\Windows\System32\drivers\etc\hosts add line
+127.0.0.1       db
+
