@@ -141,7 +141,7 @@ curl -i -X POST localhost:8080/api/employee_hours -d "{""value"": ""60"", ""empl
 ```
 curl -i  localhost:8080/api/employee_hours/list_all
 ```
-4. Checking in added hours in BO exists in HQ
+4. Checking if added hours in BO exists in HQ
 ```
 curl -i -L http://127.0.0.1:8000/api/employee_hours/list
 ```
