@@ -9,7 +9,7 @@ urlpatterns = [
     path('api/employees', employees_views.add_employee),
     # Gets a collection of employee objects by branchOfficeId
     path('api/employees/list/<int:branchOfficeId>', employees_views.employees_list),
-    # Removing and updating employee
+    # Removing or updating employee
     path('api/employees/<int:pk>', employees_views.employees_detail),
     # To show employees and hours worked by each of them
     path('api/employee_hours/list', employees_views.employees_hours),

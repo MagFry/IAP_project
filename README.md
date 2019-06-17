@@ -56,10 +56,28 @@ In file C:\Windows\System32\drivers\etc\hosts add line
 4. python src/manage.py runserver 8000
 ```
 ## API Server endpoints examples
+###### Branch Office part
 Gets a collection of BranchOffice objects
 ```
 curl -i -L localhost:8000/api/branch_offices/list
 ```
+To add branch office 
+```
+curl -i -X POST localhost:8000/api/branch_offices -d "{""branch_office_name"": ""French_school"", ""branch_office_location"": ""Wawa""}"
+```
+To show branch office with id=1
+```
+curl -i -L localhost:8000/api/branch_offices/1
+```
+To delete branch office with id=2
+```
+curl -X DELETE localhost:8000/api/branch_offices/2
+```
+To update branch office with id=1 (changing name from English_school to Spanish_school)
+```
+curl -X PUT -d "{""branch_office_name"": ""Spanish_school"", ""branch_office_location"": ""Lodz""}" localhost:8000/api/branch_offices/1
+```
+###### Employee part
 To show list of all employees
 ```
 curl -i -L localhost:8000/api/employees/all

@@ -3,20 +3,25 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from .models import Branch_Offices
 from .serializers import Branch_OfficesSerializer
-from pprint import pprint
-from django.core import serializers
+
 
 @csrf_exempt
 def branch_offices_list(request):
     """
-    List all code snippets, or create a new snippet.
+    List all branch offices.
     """
     if request.method == 'GET':
         branch_offices = Branch_Offices.objects.all()
         serializer = Branch_OfficesSerializer(branch_offices, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-    elif request.method == 'POST':
+
+@csrf_exempt
+def add_branch_office(request):
+    """
+    Create new branch office.
+    """
+    if request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = Branch_OfficesSerializer(data=data)
         if serializer.is_valid():
@@ -24,10 +29,11 @@ def branch_offices_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(request, status=400, safe=False)
 
+
 @csrf_exempt
 def branch_offices_detail(request, pk):
     """
-    Retrieve, update or delete a code snippet.
+    Retrieve, update or delete a branch office.
     """
     try:
         branch_offices = Branch_Offices.objects.get(branch_office_id=pk)
