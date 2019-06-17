@@ -84,7 +84,7 @@ GET /api/branch_offices/{branchOfficeId}/employee/{employeeId}/employee_hours [G
 
 ## API Server endpoints examples
 
-###### Branch Office part
+#### Branch Office part
 Gets a collection of BranchOffice objects
 ```
 curl -i -L localhost:8000/api/branch_offices/list
@@ -106,7 +106,7 @@ To update branch office with id=1 (changing name from English_school to Spanish_
 curl -X PUT -d "{""branch_office_name"": ""Spanish_school"", ""branch_office_location"": ""Lodz""}" localhost:8000/api/branch_offices/1
 ```
 
-###### Employee part
+#### Employee part
 To show list of all employees
 ```
 curl -i -L localhost:8000/api/employees/all
@@ -128,7 +128,7 @@ To update employee with id = 4 (changing pay value from 30 to 50)
 curl -X PUT -d "{""employee_id"": 4,""name"": ""Mag Fry"",""email"": ""mag123@wp.pl"",""date_of_birth"": ""1996-01-01"",""pay"": 50,""branch_office_id"": 2,""isManager"": ""false""}" localhost:8000/api/employees/4
 ```
 
-###### Synchronization in HQ from BO
+#### Synchronization in HQ from BO
 1. Checking the content of employee_hours in HQ
 ```
 curl -i -L http://127.0.0.1:8000/api/employee_hours/list
