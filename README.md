@@ -70,10 +70,16 @@ PUT /api/branch_offices/{branchOfficeId} [Updates a one Branch Office object]
 ###### Employee
 ```
 GET /api/employees/list/{branchOfficeId} [Gets a collection of Employees objects for given Branch Office]
+GET /api/employees/all [Gets a collection of Employees objects]
 POST /api/employees [Adds a new Employee object]
 GET /api/employees/{employeeId} [Gets one Employees object]
 DELETE /api/employees/{employeeId} [Deletes an Employee object]
 PUT /api/employees/{employeeId} [Updates an existing Employee object]
+```
+###### Salary and Hours
+```
+[TODO]GET /api/salaries/list [Gets a collection of Salary objects]
+GET /api/branch_offices/{branchOfficeId}/employee/{employeeId}/employee_hours [Gets a collection of Hours objects for given employee in given branch office]
 ```
 
 ## API Server endpoints examples
@@ -120,4 +126,26 @@ curl -X DELETE localhost:8000/api/employees/4
 To update employee with id = 4 (changing pay value from 30 to 50)
 ```
 curl -X PUT -d "{""employee_id"": 4,""name"": ""Mag Fry"",""email"": ""mag123@wp.pl"",""date_of_birth"": ""1996-01-01"",""pay"": 50,""branch_office_id"": 2,""isManager"": ""false""}" localhost:8000/api/employees/4
+```
+
+######Synchronization in HQ from BO
+1.Checking the content of employee_hours in HQ
+```
+curl -i -L http://127.0.0.1:8000/api/employee_hours/list
+```
+2.Add an hours in BO
+```
+curl -i -X POST localhost:8080/api/employee_hours -d "{""value"": ""60"", ""employeeId"": ""2"", ""timePeriod"": ""20.06.2019-26.05.2019"" }" -H 'Content-Type:text/json;charset=utf-8'
+```
+3. Check that it was added in BO
+```
+curl -i  localhost:8080/api/employee_hours/list_all
+```
+4. Checkking in added hours in BO exists in HQ
+```
+curl -i -L http://127.0.0.1:8000/api/employee_hours/list
+```
+5. Returning hours for given employee (id = 1) in given branch office (id=1) which were retrieved from BO
+```
+curl -i -L http://localhost:8000/api/branch_offices/1/employees/1/employee_hours
 ```

@@ -95,6 +95,7 @@ def employees_hours(request):
         return JsonResponse(serializer.data, safe=False)
 
 
+# TODO: correcting employees_salaries function
 # counting salary for each employ and adding to Salaries table(not working for now)
 @csrf_exempt
 def employees_salaries(request):
@@ -120,6 +121,7 @@ def employees_salaries(request):
         return JsonResponse(serializer.data, safe=False)
 
 
+# Getting hours for given employee in given branch office
 @csrf_exempt
 def employees_hours_per_BO(request, branchOfficeId, emp_id):
     if request.method == 'GET':

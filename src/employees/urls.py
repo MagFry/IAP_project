@@ -11,8 +11,10 @@ urlpatterns = [
     path('api/employees/list/<int:branchOfficeId>', employees_views.employees_list),
     # Removing or updating employee
     path('api/employees/<int:pk>', employees_views.employees_detail),
-    # To show employees and hours worked by each of them
+    # To show employees and hours worked by each of them; data retrieved from BO
     path('api/employee_hours/list', employees_views.employees_hours),
+    # TODO: correcting employees_salaries function
     path('api/salaries', employees_views.employees_salaries),
+    # Getting hours for given employee in given branch office
     path('api/branch_offices/<int:branchOfficeId>/employees/<int:emp_id>/employee_hours', employees_views.employees_hours_per_BO),
 ]
