@@ -128,12 +128,12 @@ To update employee with id = 4 (changing pay value from 30 to 50)
 curl -X PUT -d "{""employee_id"": 4,""name"": ""Mag Fry"",""email"": ""mag123@wp.pl"",""date_of_birth"": ""1996-01-01"",""pay"": 50,""branch_office_id"": 2,""isManager"": ""false""}" localhost:8000/api/employees/4
 ```
 
-######Synchronization in HQ from BO
-1.Checking the content of employee_hours in HQ
+###### Synchronization in HQ from BO
+1. Checking the content of employee_hours in HQ
 ```
 curl -i -L http://127.0.0.1:8000/api/employee_hours/list
 ```
-2.Add an hours in BO
+2. Add an hours in BO
 ```
 curl -i -X POST localhost:8080/api/employee_hours -d "{""value"": ""60"", ""employeeId"": ""2"", ""timePeriod"": ""20.06.2019-26.05.2019"" }" -H 'Content-Type:text/json;charset=utf-8'
 ```
@@ -141,7 +141,7 @@ curl -i -X POST localhost:8080/api/employee_hours -d "{""value"": ""60"", ""empl
 ```
 curl -i  localhost:8080/api/employee_hours/list_all
 ```
-4. Checkking in added hours in BO exists in HQ
+4. Checking in added hours in BO exists in HQ
 ```
 curl -i -L http://127.0.0.1:8000/api/employee_hours/list
 ```
