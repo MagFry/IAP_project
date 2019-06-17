@@ -27,8 +27,8 @@ $ cat my-emp.json
 #       "email": "mag123@wp.pl",
 #       "date_of_birth": "1996-01-01",
 #       "pay": 30,
-#       "branch_office_id": 2
-#       "isManager": False
+#       "branch_office_id": 2,
+#       "isManager": "false"
 # }
 $ curl -i -X POST localhost:8000/api/employees -d @my-emp.json -H 'Content-Type: text/json; charset=utf-8'
 $ curl -i -L localhost:8000/api/employees/list/2
