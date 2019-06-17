@@ -30,7 +30,7 @@ def branch_offices_detail(request, pk):
     Retrieve, update or delete a code snippet.
     """
     try:
-        branch_offices = Branch_Offices.objects.get(pk=pk)
+        branch_offices = Branch_Offices.objects.get(branch_office_id=pk)
     except Branch_Offices.DoesNotExist:
         return HttpResponse(status=404)
 

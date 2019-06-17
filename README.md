@@ -56,6 +56,10 @@ In file C:\Windows\System32\drivers\etc\hosts add line
 4. python src/manage.py runserver 8000
 ```
 ## API Server endpoints examples
+Gets a collection of BranchOffice objects
+```
+curl -i -L localhost:8000/api/branch_offices/list
+```
 To show list of all employees
 ```
 curl -i -L localhost:8000/api/employees/all
