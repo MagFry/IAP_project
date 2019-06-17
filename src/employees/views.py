@@ -44,7 +44,7 @@ def employees_detail(request, pk):
     Retrieve, update or delete an employee.
     """
     try:
-        emp = Employees.objects.get(pk=pk)
+        emp = Employees.objects.get(employee_id=pk)
     except Employees.DoesNotExist:
         return HttpResponse(status=404)
 
@@ -65,11 +65,10 @@ def employees_detail(request, pk):
         return HttpResponse(status=204)
 
 
-# Remeber to add /api/employee_hours/list_all endpoint in stead the one placed below
 # synchronization with BO in order to retrieve employee hours
 @csrf_exempt
 def employees_hours(request):
-    url = 'http://127.0.0.1:8080/employee_hours/list'
+    url = 'http://127.0.0.1:8080/api/employee_hours/list_all'
     r = requests.get(url,verify=False)
     hours = r.json()
     dict = {}

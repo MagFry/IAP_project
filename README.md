@@ -72,4 +72,7 @@ To delete employee with id = 4
 ```
 curl -X DELETE localhost:8000/api/employees/4
 ```
-To update employee with id = 4
+To update employee with id = 4 (changing pay value from 30 to 50)
+```
+curl -X PUT -d "{""employee_id"": 4,""name"": ""Mag Fry"",""email"": ""mag123@wp.pl"",""date_of_birth"": ""1996-01-01"",""pay"": 50,""branch_office_id"": 2,""isManager"": ""false""}" localhost:8000/api/employees/4
+```

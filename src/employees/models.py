@@ -5,7 +5,7 @@ from django.contrib import admin
 
 # Register your models here.
 class Employees(models.Model):
-    employee_id = models.AutoField(primary_key=True)
+    employee_id = models.IntegerField()
     name = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     date_of_birth = models.DateField()
@@ -17,7 +17,7 @@ class Employees(models.Model):
         return self.name
 
 class EmployeesHours(models.Model):
-    employees_hours_id = models.AutoField(primary_key=True)
+    employees_hours_id = models.IntegerField()
     time_period = models.CharField(max_length=200)
     value = models.IntegerField()
     employee_id = models.IntegerField()
@@ -26,5 +26,5 @@ class EmployeesHours(models.Model):
         return self.employee_id
 
 class EmployeesSalaries(models.Model):
-    employee_salary_id = models.AutoField(primary_key=True)
+    employee_salary_id = models.IntegerField()
     salary = models.FloatField()
