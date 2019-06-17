@@ -55,7 +55,29 @@ In file C:\Windows\System32\drivers\etc\hosts add line
 3. python src/manage.py migrate 
 4. python src/manage.py runserver 8000
 ```
+
+## Implemented endpoints
+
+###### BranchOffice
+```
+GET /api/branch_offices/list [Gets a collection of BranchOffice objects]
+POST /api/branch_offices [Adds new Branch Office object]
+GET /api/branch_offices/{branchOfficeId} [Gets a one Branch Office object]
+DELETE /api/branch_offices/{branchOfficeId} [Delets a one Branch Office object]
+PUT /api/branch_offices/{branchOfficeId} [Updates a one Branch Office object]
+```
+
+###### Employee
+```
+GET /api/employees/list/{branchOfficeId} [Gets a collection of Employees objects for given Branch Office]
+POST /api/employees [Adds a new Employee object]
+GET /api/employees/{employeeId} [Gets one Employees object]
+DELETE /api/employees/{employeeId} [Deletes an Employee object]
+PUT /api/employees/{employeeId} [Updates an existing Employee object]
+```
+
 ## API Server endpoints examples
+
 ###### Branch Office part
 Gets a collection of BranchOffice objects
 ```
@@ -77,6 +99,7 @@ To update branch office with id=1 (changing name from English_school to Spanish_
 ```
 curl -X PUT -d "{""branch_office_name"": ""Spanish_school"", ""branch_office_location"": ""Lodz""}" localhost:8000/api/branch_offices/1
 ```
+
 ###### Employee part
 To show list of all employees
 ```
