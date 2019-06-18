@@ -4,6 +4,7 @@ from rest_framework.parsers import JSONParser
 from .models import Employees, EmployeesHours, EmployeesSalaries
 from .serializers import EmployeesSerializer, EmployeesHoursSerializer, EmployeesSalariesSerializer
 import requests
+import os
 
 
 @csrf_exempt
@@ -68,7 +69,10 @@ def employees_detail(request, pk):
 # synchronization with BO in order to retrieve employee hours
 @csrf_exempt
 def employees_hours(request):
-    url = 'http://127.0.0.1:8080/api/employee_hours/list_all'
+    bo_host = os.environ['IAP_HQ_BO_HOST']
+    if bo_host == "":
+        bo_host = "127.0.0.1"
+    url = 'http://' + bo_host + ':8080/api/employee_hours/list_all'
     r = requests.get(url,verify=False)
     hours = r.json()
     dict = {}
