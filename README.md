@@ -92,6 +92,7 @@ curl -i -L localhost:8000/api/branch_offices/list
 To add branch office 
 ```
 curl -i -X POST localhost:8000/api/branch_offices -d "{""branch_office_name"": ""French_school"", ""branch_office_location"": ""Wawa""}"
+curl -i -X POST localhost:8000/api/branch_offices -d "{""branch_office_name"": ""English_school"", ""branch_office_location"": ""Lodz""}"
 ```
 To show branch office with id=1
 ```
