@@ -21,7 +21,7 @@ tags:
   externalDocs:
     description: "Find out more"
     url: "https://github.com/MagFry/IAP_project"
-- name: "hours"
+- name: "employee_hours"
   description: "Concerns Hours objects"
   externalDocs:
     description: "Find out more"
@@ -164,7 +164,7 @@ paths:
       - "employees"
       summary: "Gets a collection of Employees objects"
       description: "Gets a collection of Employees objects"
-      operationId: "getEmployees"
+      operationId: "getEmployeesAll"
       produces:
       - "application/xml"
       - "application/json"
@@ -324,7 +324,7 @@ paths:
   /api/branch_offices/{branchOfficeId}/employee/{employeeId}/employee_hours:
     get:
       tags:
-      - "hours"
+      - "employee_hours"
       summary: "Gets a collection of Hours objects for given employee in given branch office"
       description: "Gets a collection of Hours objects for given employee in given branch office"
       operationId: "getBranchOfficesandEmpID"
